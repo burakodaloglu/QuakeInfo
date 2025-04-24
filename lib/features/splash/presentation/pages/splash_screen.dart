@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 import 'dart:math';
 
+import 'package:go_router/go_router.dart';
+import 'package:quakeinfo/config/routes/router.dart';
+
 class SplashScreen extends StatefulWidget {
   const SplashScreen({super.key});
 
@@ -22,13 +25,13 @@ class _SplashScreenState extends State<SplashScreen>
       duration: const Duration(seconds: 2),
     )..repeat(reverse: true);
 
-    _animation = Tween<double>(begin: 0, end: 10).animate(
-      CurvedAnimation(parent: _controller, curve: Curves.easeInOut),
-    );
+    _animation = Tween<double>(
+      begin: 0,
+      end: 10,
+    ).animate(CurvedAnimation(parent: _controller, curve: Curves.easeInOut));
 
-    Future.delayed(const Duration(seconds: 4), () {
-      // Splash sonrası yönlendirme yapılabilir
-      // Navigator.pushReplacement(context, MaterialPageRoute(builder: (_) => HomePage()));
+    Future.delayed(const Duration(seconds: 2), () {
+      context.push(AppRoutes.home);
     });
   }
 
@@ -41,7 +44,7 @@ class _SplashScreenState extends State<SplashScreen>
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.blue.shade50, // Açık arka plan rengi
+      backgroundColor: Colors.blue.shade50,
       body: Center(
         child: AnimatedBuilder(
           animation: _animation,
