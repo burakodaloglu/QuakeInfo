@@ -1,5 +1,8 @@
+import 'package:QuakeInfo/config/routes/router.dart';
+import 'package:QuakeInfo/features/widgets/appbar_widgets.dart';
 import 'package:flame_audio/flame_audio.dart';
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -32,11 +35,7 @@ class _HomeScreenState extends State<HomeScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor:Colors.blue.shade50,
-      appBar: AppBar(
-        title: const Text('QuakeInfo'),
-        centerTitle: true,
-        backgroundColor: Colors.blueAccent,
-      ),
+      appBar:AppbarWidget(title: "QuakeInfo"),
       body: Center(
         child: Padding(
           padding: const EdgeInsets.all(24.0),
@@ -47,24 +46,24 @@ class _HomeScreenState extends State<HomeScreen> {
             shrinkWrap: true,
             children: [
               _buildButton(
-                icon: Icons.public,
+                icon: Image.asset("assets/images/earthquake.png"),
                 label: 'Dünya Depremleri',
-                onTap: () {},
+                onTap: () => context.push(AppRoutes.earthquake),
               ),
               _buildButton(
-                icon: Icons.notifications_active,
+                icon: Image.asset("assets/images/whistle-blower.png"),
                 label: 'Düdük',
                 onTap: _toggleWhistleSound,
               ),
               _buildButton(
-                icon: Icons.info,
+                icon:  Image.asset("assets/images/information.png"),
                 label: 'Neler Yapmalıyım',
-                onTap: () {},
+                onTap: () =>context.push(AppRoutes.information),
               ),
               _buildButton(
-                icon: Icons.backpack,
+                icon: Image.asset("assets/images/bag.png"),
                 label: 'Çanta',
-                onTap: () {},
+                onTap: () =>context.push(AppRoutes.bag),
               ),
             ],
           ),
@@ -74,7 +73,7 @@ class _HomeScreenState extends State<HomeScreen> {
   }
 
   Widget _buildButton({
-    required IconData icon,
+    required Image icon,
     required String label,
     required VoidCallback onTap,
   }) {
@@ -90,7 +89,7 @@ class _HomeScreenState extends State<HomeScreen> {
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          Icon(icon, size: 48, color: Colors.blue),
+          Image(image: icon.image, width: 75, height: 75),
           const SizedBox(height: 12),
           Text(label, style: const TextStyle(fontSize: 16, fontWeight: FontWeight.bold)),
         ],
