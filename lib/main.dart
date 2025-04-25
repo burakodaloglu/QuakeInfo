@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:quakeinfo/config/routes/router.dart';
-import 'features/splash/presentation/pages/splash_screen.dart';
+import 'config/routes/router.dart';
 
 void main() {
   runApp(const MyApp());
