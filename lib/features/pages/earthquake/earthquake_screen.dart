@@ -1,4 +1,7 @@
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
+
+import '../../widgets/appbar_widgets.dart';
 
 class EarthquakeScreen extends StatefulWidget {
   const EarthquakeScreen({super.key});
@@ -10,6 +13,9 @@ class EarthquakeScreen extends StatefulWidget {
 class _EarthquakeScreenState extends State<EarthquakeScreen> {
   @override
   Widget build(BuildContext context) {
-    return const Placeholder();
+    return Scaffold(
+      backgroundColor: Colors.blue.shade50,
+      appBar: AppbarWidget(title: "Dünya Depremleri"),
+    );
   }
 }

@@ -2,8 +2,13 @@ import 'package:flutter/material.dart';
 
 class AppbarWidget extends StatelessWidget implements PreferredSizeWidget {
   final String title;
+  final VoidCallback? onInfoTap;
 
-  const AppbarWidget({super.key, required this.title});
+  const AppbarWidget({
+    super.key,
+    required this.title,
+    this.onInfoTap,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -12,20 +17,21 @@ class AppbarWidget extends StatelessWidget implements PreferredSizeWidget {
       title: Text(
         title,
         style: const TextStyle(
-          fontSize: 22,
-          fontWeight: FontWeight.w500,
-          color: Colors.black,
+          fontSize: 20,
+          fontWeight: FontWeight.w600,
+          color: Colors.black87,
         ),
       ),
+      centerTitle: true,
       actions: [
         IconButton(
-          onPressed:
-              () => {
-                //context.push(AppRouter.cart)
-              },
-          icon: const Icon(Icons.settings, color: Colors.black),
+          onPressed: (){
+
+          },
+          icon: const Icon(Icons.settings, color: Colors.black87),
         ),
       ],
+      iconTheme: const IconThemeData(color: Colors.black87),
     );
   }
 

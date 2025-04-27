@@ -26,6 +26,7 @@ dependencies:
   ionicons: ^0.2.2
   lottie: ^3.3.1
   flame_audio: ^2.11.5
+  youtube_player_flutter: ^9.1.1
 
 dev_dependencies:
   flutter_test:
