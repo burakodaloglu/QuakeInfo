@@ -1,5 +1,5 @@
 import 'package:QuakeInfo/config/routes/router.dart';
-import 'package:QuakeInfo/features/widgets/appbar_widgets.dart';
+import 'package:QuakeInfo/features/quakeinfo/presentation/widgets/appbar_widgets.dart';
 import 'package:flame_audio/flame_audio.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';

@@ -1,11 +1,11 @@
-import 'package:QuakeInfo/features/pages/bag/bag_screen.dart';
-import 'package:QuakeInfo/features/pages/earthquake/earthquake_screen.dart';
-import 'package:QuakeInfo/features/pages/info/information_screen.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:go_router/go_router.dart';
 
-import '../../features/pages/home/home_screen.dart';
-import '../../features/pages/splash/splash_screen.dart';
+import '../../features/quakeinfo/presentation/pages/bag/bag_screen.dart';
+import '../../features/quakeinfo/presentation/pages/earthquake/earthquake_screen.dart';
+import '../../features/quakeinfo/presentation/pages/home/home_screen.dart';
+import '../../features/quakeinfo/presentation/pages/info/information_screen.dart';
+import '../../features/quakeinfo/presentation/pages/splash/splash_screen.dart';
 
 
 final _routerKey = GlobalKey<NavigatorState>();

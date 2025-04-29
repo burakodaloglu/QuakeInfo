@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:lottie/lottie.dart';
 
-import '../../../config/routes/router.dart';
+import '../../../../../config/routes/router.dart';
 
 class SplashScreen extends StatefulWidget {
   const SplashScreen({super.key});
