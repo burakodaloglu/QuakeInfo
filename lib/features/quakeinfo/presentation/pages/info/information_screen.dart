@@ -100,6 +100,7 @@ class _InformationScreenState extends State<InformationScreen> {
               itemBuilder: (context, index) {
                 final step = actionSteps[index];
                 return Card(
+                  color: Colors.white,
                   shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
                   elevation: 2,
                   margin: const EdgeInsets.symmetric(vertical: 8),
