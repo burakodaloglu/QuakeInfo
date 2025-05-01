@@ -1,5 +1,4 @@
 import 'package:floor/floor.dart';
-import 'package:flutter/cupertino.dart';
 
 import '../../../../domain/entities/bag_entity.dart';
 
