@@ -1,7 +1,10 @@
 import 'package:QuakeInfo/features/quakeinfo/data/repository/quakeinfo_repository_impl.dart';
 import 'package:QuakeInfo/features/quakeinfo/data/sources/local/bag_database.dart';
+import 'package:QuakeInfo/features/quakeinfo/data/sources/remote/earthquake_api_service.dart';
 import 'package:QuakeInfo/features/quakeinfo/domain/repository/quakeinfo_repository.dart';
+import 'package:QuakeInfo/features/quakeinfo/domain/usecase/get_earthquake_use_case.dart';
 import 'package:QuakeInfo/features/quakeinfo/presentation/bloc/bag/local/local_bag_bloc.dart';
+import 'package:QuakeInfo/features/quakeinfo/presentation/bloc/earthquake/remote/remote_earthquake_bloc.dart';
 import 'package:QuakeInfo/features/quakeinfo/presentation/bloc/info/local/local_info_bloc.dart';
 import 'package:dio/dio.dart';
 import 'package:get_it/get_it.dart';
@@ -41,14 +44,17 @@ Future<void> initializeDependencies() async {
   sl.registerSingleton<Dio>(Dio());
 
   //Dependencies
-  sl.registerSingleton<QuakeinfoRepository>(
-    QuakeInfoRepositoryImpl(sl(), sl()),
+  sl.registerSingleton<EarthquakeService>(EarthquakeService(sl()));
+  sl.registerSingleton<QuakeInfoRepository>(
+    QuakeInfoRepositoryImpl(sl(), sl(), sl()),
   );
 
   //UseCase
   sl.registerSingleton<UpdateBagUseCase>(UpdateBagUseCase(sl()));
+  sl.registerSingleton<GetEarthquakeUseCase>(GetEarthquakeUseCase(sl()));
 
   //Blocs
   sl.registerFactory<LocalBagBloc>(() => LocalBagBloc(sl()));
-  sl.registerFactory<LocalInfoBloc>(()=> LocalInfoBloc());
+  sl.registerFactory<LocalInfoBloc>(() => LocalInfoBloc());
+  sl.registerFactory<RemoteEarthquakeBloc>(() => RemoteEarthquakeBloc(sl()));
 }

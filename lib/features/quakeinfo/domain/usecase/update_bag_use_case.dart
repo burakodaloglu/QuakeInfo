@@ -3,7 +3,7 @@ import '../entities/bag_entity.dart';
 import '../repository/quakeinfo_repository.dart';
 
 class UpdateBagUseCase implements UseCase<void, BagEntity> {
-  final QuakeinfoRepository _quakeinfoRepository;
+  final QuakeInfoRepository _quakeinfoRepository;
 
   UpdateBagUseCase(this._quakeinfoRepository);
 
