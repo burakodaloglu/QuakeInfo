@@ -12,8 +12,9 @@ class EarthquakeListScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final colorScheme = Theme.of(context).colorScheme;
     return Scaffold(
-      backgroundColor: Colors.blue.shade50,
+      backgroundColor: colorScheme.background,
       appBar: const AppbarWidget(title: "Liste"),
       body: _buildBody(),
     );
@@ -21,9 +22,16 @@ class EarthquakeListScreen extends StatelessWidget {
 
   _buildBody() {
     return BlocBuilder<RemoteEarthquakeBloc, RemoteEarthquakeState>(
-      builder: (_, state) {
+      builder: (context, state) {
         if (state is RemoteEarthquakeLoading) {
-          return const Center(child: CupertinoActivityIndicator());
+          return Center(
+            child: CircularProgressIndicator(
+              valueColor: AlwaysStoppedAnimation<Color>(
+                Theme.of(context).colorScheme.primary,
+              ),
+            ),
+          );
+
         }
         if (state is RemoteEarthquakeError) {
           return const Center(child: Icon(Icons.refresh));

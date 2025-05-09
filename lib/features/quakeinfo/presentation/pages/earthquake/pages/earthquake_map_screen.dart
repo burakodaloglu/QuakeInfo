@@ -1,4 +1,3 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
@@ -12,8 +11,9 @@ class EarthquakeMapScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final colorScheme = Theme.of(context).colorScheme;
     return Scaffold(
-      backgroundColor: Colors.blue.shade50,
+      backgroundColor: colorScheme.background,
       appBar: const AppbarWidget(title: "Harita"),
       body: _buildBody(),
     );
@@ -21,9 +21,16 @@ class EarthquakeMapScreen extends StatelessWidget {
 
   _buildBody() {
     return BlocBuilder<RemoteEarthquakeBloc, RemoteEarthquakeState>(
-      builder: (_, state) {
+      builder: (context, state) {
         if (state is RemoteEarthquakeLoading) {
-          return const Center(child: CupertinoActivityIndicator());
+          return Center(
+            child: CircularProgressIndicator(
+              valueColor: AlwaysStoppedAnimation<Color>(
+                Theme.of(context).colorScheme.primary,
+              ),
+            ),
+          );
+
         }
         if (state is RemoteEarthquakeError) {
           return const Center(child: Icon(Icons.refresh));

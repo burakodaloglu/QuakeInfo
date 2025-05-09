@@ -41,10 +41,11 @@ class _InformationScreenState extends State<InformationScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final colorScheme = Theme.of(context).colorScheme;
     return BlocProvider(
       create: (_) => sl<LocalInfoBloc>()..add(const LocalInfoLoad()),
       child: Scaffold(
-        backgroundColor: Colors.blue.shade50,
+        backgroundColor: colorScheme.background,
         appBar: AppbarWidget(title: 'Neler Yapmalıyım'),
         body: Column(
           children: [
@@ -58,7 +59,14 @@ class _InformationScreenState extends State<InformationScreen> {
               child: BlocBuilder<LocalInfoBloc, LocalInfoState>(
                 builder: (context, state) {
                   if (state is LocalInfoLoading) {
-                    return const Center(child: CircularProgressIndicator());
+                    return Center(
+                      child: CircularProgressIndicator(
+                        valueColor: AlwaysStoppedAnimation<Color>(
+                          Theme.of(context).colorScheme.primary,
+                        ),
+                      ),
+                    );
+
                   } else if (state is LocalInfoDone) {
                     final infoItems = state.info!;
                     if (infoItems.isEmpty) {
@@ -75,7 +83,7 @@ class _InformationScreenState extends State<InformationScreen> {
                       padding: const EdgeInsets.only(bottom: 16),
                       itemCount: infoItems.length,
                       itemBuilder: (context, index) {
-                        return InfoCard(info: infoItems[index]);
+                        return InfoCardWidget(info: infoItems[index]);
                       },
                     );
                   } else {

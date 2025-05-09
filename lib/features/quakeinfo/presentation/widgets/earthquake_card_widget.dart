@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
+import 'package:timeago/timeago.dart' as timeago;
 
 import '../../data/model/earthquake.dart';
 
@@ -10,91 +11,131 @@ class EarthquakeCardWidget extends StatelessWidget {
 
   String _formatTime(int timestamp) {
     final date = DateTime.fromMillisecondsSinceEpoch(timestamp);
-    return DateFormat('yyyy-MM-dd HH:mm').format(date);
+    return DateFormat('HH:mm').format(date);
+  }
+
+  String _timeAgo(int timestamp) {
+    final date = DateTime.fromMillisecondsSinceEpoch(timestamp);
+    return timeago.format(date, locale: 'tr');
   }
 
   @override
   Widget build(BuildContext context) {
-    // Earthquake widget'lerini oluşturuyoruz
-    List<Widget> earthquakeWidgets = earthquake?.features.map((feature) {
-      final place = feature.properties.place ?? 'Unknown location';
-      final mag = feature.properties.mag ?? 'N/A';
-      final earthquakeTime = feature.properties.time;
-      final time = earthquakeTime != null ? _formatTime(earthquakeTime) : 'Unknown time';
+    final theme = Theme.of(context);
+    final colorScheme = theme.colorScheme;
 
-      return Card(
-        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
-        margin: const EdgeInsets.symmetric(vertical: 6),
-        color: Colors.white,
-        elevation: 4,
-        child: Padding(
-          padding: const EdgeInsets.all(12),
-          child: Row(
-            crossAxisAlignment: CrossAxisAlignment.center,
-            children: [
-              // Sol tarafta içerik (başlık + zaman)
-              Expanded(
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text(
-                      "$place",
-                      style: Theme.of(context).textTheme.titleMedium?.copyWith(
-                        fontWeight: FontWeight.bold,
-                        fontSize: 16,
-                      ),
-                    ),
-                    const SizedBox(height: 8),
-                    Text("Time: $time", style: TextStyle(color: Colors.grey[700])),
-                  ],
-                ),
-              ),
-
-              // Sağ ortada Mag değeri
-              Align(
-                alignment: Alignment.centerRight,
-                child: Container(
-                  padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
-                  decoration: BoxDecoration(
-                    color: Colors.redAccent.withOpacity(0.1),
-                    borderRadius: BorderRadius.circular(8),
-                  ),
-                  child: Text(
-                    "$mag",
-                    style: const TextStyle(
-                      color: Colors.redAccent,
-                      fontWeight: FontWeight.bold,
-                      fontSize: 14,
-                    ),
-                  ),
-                ),
-              )
-            ],
+    if (earthquake == null || earthquake!.features.isEmpty) {
+      return Padding(
+        padding: const EdgeInsets.all(16.0),
+        child: Text(
+          "Deprem verisi bulunamadı",
+          style: theme.textTheme.bodyMedium?.copyWith(
+            color: colorScheme.onSurface.withOpacity(0.6),
           ),
         ),
       );
-
-    }).toList() ?? [];
-
-    // Eğer earthquake null ise ya da liste boşsa, bir şey göstermemek için boş bir widget döndürüyoruz
-    if (earthquake == null || earthquake!.features.isEmpty) {
-      return const Center(child: Text("No earthquake data available."));
     }
 
-    return Card(
-      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
-      color: Colors.blue.shade50, // Kart arka planını burda da mavi tonuna ayarlıyoruz
+    return Column(
+      children:
+          earthquake!.features.asMap().entries.map((entry) {
+            final index = entry.key;
+            final feature = entry.value;
+            final isLast = index == earthquake!.features.length - 1;
 
-      child: Padding(
-        padding: const EdgeInsets.all(8),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            // Tüm earthquake özelliklerini gösteriyoruz
-            ...earthquakeWidgets,
-          ],
-        ),
-      ),
+            final place = feature.properties.place?.split(', ') ?? [];
+            final cityCountry = place.take(2).join(', ');
+            final region = place.length > 2 ? place[2] : '';
+            final mag = feature.properties.mag?.toStringAsFixed(2) ?? 'N/A';
+            final time = feature.properties.time;
+
+            return Column(
+              children: [
+                Padding(
+                  padding: const EdgeInsets.symmetric(
+                    vertical: 12,
+                    horizontal: 16,
+                  ),
+                  child: Row(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Expanded(
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text(
+                              cityCountry,
+                              style: theme.textTheme.titleMedium?.copyWith(
+                                fontWeight: FontWeight.w600,
+                                fontSize: 15,
+                                color: colorScheme.onSurface,
+                              ),
+                            ),
+                            if (region.isNotEmpty)
+                              Padding(
+                                padding: const EdgeInsets.only(top: 4),
+                                child: Text(
+                                  region,
+                                  style: theme.textTheme.bodySmall?.copyWith(
+                                    color: colorScheme.onSurface.withOpacity(
+                                      0.7,
+                                    ),
+                                    fontSize: 13,
+                                  ),
+                                ),
+                              ),
+                            const SizedBox(height: 8),
+                            Text(
+                              time != null ? _timeAgo(time) : '--',
+                              style: theme.textTheme.bodySmall?.copyWith(
+                                color: colorScheme.onSurface.withOpacity(0.6),
+                                fontSize: 12,
+                              ),
+                            ),
+                            Text(
+                              time != null ? _formatTime(time) : '--:--',
+                              style: theme.textTheme.bodySmall?.copyWith(
+                                color: colorScheme.onSurface.withOpacity(0.6),
+                                fontSize: 12,
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                      Container(
+                        padding: const EdgeInsets.symmetric(
+                          horizontal: 12,
+                          vertical: 6,
+                        ),
+                        decoration: BoxDecoration(
+                          border: Border.all(
+                            color: colorScheme.error.withOpacity(0.6),
+                            width: 1.5,
+                          ),
+                          borderRadius: BorderRadius.circular(6),
+                        ),
+                        child: Text(
+                          mag,
+                          style: TextStyle(
+                            color: colorScheme.error,
+                            fontWeight: FontWeight.bold,
+                            fontSize: 15,
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+                if (!isLast)
+                  Divider(
+                    height: 1,
+                    indent: 16,
+                    endIndent: 16,
+                    color: colorScheme.outline.withOpacity(0.3),
+                  ),
+              ],
+            );
+          }).toList(),
     );
   }
 }
