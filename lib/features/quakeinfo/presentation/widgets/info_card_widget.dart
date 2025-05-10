@@ -1,5 +1,7 @@
+import 'package:QuakeInfo/l10n/app_localizations.dart';
 import 'package:flutter/material.dart';
 import '../../domain/entities/info_entity.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class InfoCardWidget extends StatelessWidget {
   final InfoEntity info;
@@ -8,6 +10,7 @@ class InfoCardWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final loc = AppLocalizations.of(context)!;
     final theme = Theme.of(context);
     final colorScheme = theme.colorScheme;
 
@@ -16,7 +19,8 @@ class InfoCardWidget extends StatelessWidget {
       decoration: BoxDecoration(
         boxShadow: [
           BoxShadow(
-            color: colorScheme.shadow.withOpacity(0.08), // bir tık daha belirgin
+            color: colorScheme.shadow.withOpacity(0.08),
+            // bir tık daha belirgin
             blurRadius: 4,
             offset: const Offset(0, 2),
           ),
@@ -48,7 +52,7 @@ class InfoCardWidget extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
-                      info.title,
+                      loc.getTranslation(info.titleKey),
                       style: theme.textTheme.titleMedium?.copyWith(
                         fontWeight: FontWeight.w600,
                         color: colorScheme.onSurface,
@@ -56,7 +60,7 @@ class InfoCardWidget extends StatelessWidget {
                     ),
                     const SizedBox(height: 6),
                     Text(
-                      info.description,
+                      loc.getTranslation(info.descriptionKey),
                       style: theme.textTheme.bodyMedium?.copyWith(
                         color: colorScheme.onSurface.withOpacity(0.75),
                         height: 1.4,

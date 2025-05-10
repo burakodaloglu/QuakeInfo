@@ -36,8 +36,8 @@ class LocalBagBloc extends Bloc<LocalBagEvent, LocalBagState> {
   ) async {
     final updatedBag = BagEntity(
       id: event.bag.id,
-      title: event.bag.title,
-      description: event.bag.description,
+      titleKey: event.bag.titleKey,
+      descriptionKey: event.bag.descriptionKey,
       isCompleted: !event.bag.isCompleted,
     );
 

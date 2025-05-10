@@ -96,7 +96,7 @@ class _$BagDatabase extends BagDatabase {
       },
       onCreate: (database, version) async {
         await database.execute(
-            'CREATE TABLE IF NOT EXISTS `BagEntity` (`id` INTEGER NOT NULL, `title` TEXT NOT NULL, `description` TEXT NOT NULL, `isCompleted` INTEGER NOT NULL, PRIMARY KEY (`id`))');
+            'CREATE TABLE IF NOT EXISTS `BagEntity` (`id` INTEGER NOT NULL, `titleKey` TEXT NOT NULL, `descriptionKey` TEXT NOT NULL, `isCompleted` INTEGER NOT NULL, PRIMARY KEY (`id`))');
 
         await callback?.onCreate?.call(database, version);
       },
@@ -120,8 +120,8 @@ class _$BagDao extends BagDao {
             'BagEntity',
             (BagEntity item) => <String, Object?>{
                   'id': item.id,
-                  'title': item.title,
-                  'description': item.description,
+                  'titleKey': item.titleKey,
+                  'descriptionKey': item.descriptionKey,
                   'isCompleted': item.isCompleted ? 1 : 0
                 }),
         _bagEntityUpdateAdapter = UpdateAdapter(
@@ -130,8 +130,8 @@ class _$BagDao extends BagDao {
             ['id'],
             (BagEntity item) => <String, Object?>{
                   'id': item.id,
-                  'title': item.title,
-                  'description': item.description,
+                  'titleKey': item.titleKey,
+                  'descriptionKey': item.descriptionKey,
                   'isCompleted': item.isCompleted ? 1 : 0
                 }),
         _bagEntityDeletionAdapter = DeletionAdapter(
@@ -140,8 +140,8 @@ class _$BagDao extends BagDao {
             ['id'],
             (BagEntity item) => <String, Object?>{
                   'id': item.id,
-                  'title': item.title,
-                  'description': item.description,
+                  'titleKey': item.titleKey,
+                  'descriptionKey': item.descriptionKey,
                   'isCompleted': item.isCompleted ? 1 : 0
                 });
 
@@ -162,8 +162,8 @@ class _$BagDao extends BagDao {
     return _queryAdapter.queryList('SELECT * FROM BagEntity',
         mapper: (Map<String, Object?> row) => BagEntity(
             id: row['id'] as int,
-            title: row['title'] as String,
-            description: row['description'] as String,
+            titleKey: row['titleKey'] as String,
+            descriptionKey: row['descriptionKey'] as String,
             isCompleted: (row['isCompleted'] as int) != 0));
   }
 

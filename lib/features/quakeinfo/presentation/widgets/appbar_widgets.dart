@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:QuakeInfo/features/quakeinfo/presentation/widgets/settings_dialog_widget.dart';
 
 class AppbarWidget extends StatelessWidget implements PreferredSizeWidget {
-  final String title;
+  final Text title;
   final VoidCallback? onInfoTap;
 
   const AppbarWidget({
@@ -19,7 +19,7 @@ class AppbarWidget extends StatelessWidget implements PreferredSizeWidget {
     return AppBar(
       backgroundColor: colorScheme.background,
       title: Text(
-        title,
+        title.data!,
         style: theme.textTheme.titleLarge?.copyWith(
           fontWeight: FontWeight.w600,
           color: colorScheme.onBackground,

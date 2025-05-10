@@ -2,6 +2,7 @@ import 'package:QuakeInfo/config/routes/router.dart';
 import 'package:QuakeInfo/features/quakeinfo/presentation/widgets/appbar_widgets.dart';
 import 'package:flame_audio/flame_audio.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:go_router/go_router.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -36,7 +37,7 @@ class _HomeScreenState extends State<HomeScreen> {
     final colorScheme = Theme.of(context).colorScheme;
     return Scaffold(
       backgroundColor: colorScheme.background,
-      appBar: AppbarWidget(title: "QuakeInfo"),
+      appBar: AppbarWidget(title:Text(AppLocalizations.of(context)!.appName)),
       body: Center(
         child: Padding(
           padding: const EdgeInsets.all(24.0),
@@ -48,25 +49,25 @@ class _HomeScreenState extends State<HomeScreen> {
             children: [
               _buildButton(
                 icon: Image.asset("assets/images/earthquake.png"),
-                label: 'Dünya Depremleri',
+                label: Text(AppLocalizations.of(context)!.buttonEarthquake),
                 onTap: () => context.push(AppRoutes.earthquake),
                 colorScheme: colorScheme,
               ),
               _buildButton(
                 icon: Image.asset("assets/images/whistle.png"),
-                label: 'Düdük',
+                label: Text(AppLocalizations.of(context)!.buttonWhistle),
                 onTap: _toggleWhistleSound,
                 colorScheme: colorScheme,
               ),
               _buildButton(
                 icon:  Image.asset("assets/images/information.png"),
-                label: 'Neler Yapmalıyım',
+                label: Text(AppLocalizations.of(context)!.buttonInformation),
                 onTap: () => context.push(AppRoutes.information),
                 colorScheme: colorScheme,
               ),
               _buildButton(
                 icon: Image.asset("assets/images/bag.png"),
-                label: 'Çanta',
+                label: Text(AppLocalizations.of(context)!.buttonBag),
                 onTap: () => context.push(AppRoutes.bag),
                 colorScheme: colorScheme,
               ),
@@ -79,7 +80,7 @@ class _HomeScreenState extends State<HomeScreen> {
 
   Widget _buildButton({
     required Image icon,
-    required String label,
+    required Text label,
     required VoidCallback onTap,
     required ColorScheme colorScheme,
   }) {
@@ -98,7 +99,7 @@ class _HomeScreenState extends State<HomeScreen> {
           Image(image: icon.image, width: 75, height: 75),
           const SizedBox(height: 8),
           Text(
-            label,
+            label.data!,
             style: TextStyle(
               fontSize: 16,
               fontWeight: FontWeight.w600,

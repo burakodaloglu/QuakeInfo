@@ -5,14 +5,14 @@ import 'package:flutter/material.dart';
 class InfoEntity {
   @primaryKey
   final int id;
-  final String title;
-  final String description;
+  final String titleKey;
+  final String descriptionKey;
   final int icon;
 
   InfoEntity({
     required this.id,
-    required this.title,
-    required this.description,
+    required this.titleKey,
+    required this.descriptionKey,
     required this.icon,
   });
 }
@@ -20,50 +20,51 @@ class InfoEntity {
 final List<InfoEntity> infoList = [
   InfoEntity(
     id: 1,
-    title: 'Sakin Kal',
-    description: 'Panik yapma. Derin nefes alarak durumunu değerlendir.',
+    titleKey: 'infoTitle1',
+    descriptionKey: 'infoDec1',
     icon: Icons.self_improvement.codePoint,
   ),
   InfoEntity(
     id: 2,
-    title: 'Çök - Kapan - Tutun',
-    description: 'Sağlam bir eşyanın altına gir, başını ve enseni koru.',
+    titleKey: 'infoTitle2',
+    descriptionKey: 'infoDec2',
     icon: Icons.security.codePoint,
   ),
   InfoEntity(
     id: 3,
-    title: 'Pencerelerden Uzak Dur',
-    description: 'Camlar kırılabilir, yaralanmaları önlemek için uzak dur.',
+    titleKey: 'infoTitle3',
+    descriptionKey: 'infoDec3',
     icon: Icons.window.codePoint,
   ),
   InfoEntity(
     id: 4,
-    title: 'Asansör Kullanma',
-    description: 'Asansörler deprem anında risklidir, kullanma.',
+    titleKey: 'infoTitle4',
+    descriptionKey: 'infoDec4',
     icon: Icons.elevator.codePoint,
   ),
   InfoEntity(
     id: 5,
-    title: 'Açık Alanda Kal',
-    description: 'Bina dışındaysan; bina, direk ve ağaçlardan uzak dur.',
+    titleKey: 'infoTitle5',
+    descriptionKey: 'infoDec5',
     icon: Icons.nature_people.codePoint,
   ),
   InfoEntity(
     id: 6,
-    title: 'Deprem Bitince Kontrollü Çık',
-    description: 'Sarsıntı geçince hızlı değil, dikkatli şekilde çıkış yap.',
+    titleKey: 'infoTitle6',
+    descriptionKey: 'infoDec6',
     icon: Icons.exit_to_app.codePoint,
   ),
   InfoEntity(
     id: 7,
-    title: 'Yaralılara Yardım Et',
-    description: 'Mümkünse ilk yardım uygulayarak destek ol. Yetkililere haber ver.',
+    titleKey: 'infoTitle7',
+    descriptionKey:
+        'infoDec7',
     icon: Icons.medical_services.codePoint,
   ),
   InfoEntity(
     id: 8,
-    title: 'Doğru Bilgi Kaynağı Kullan',
-    description: 'AFAD, radyo ve resmi açıklamaları takip et.',
+    titleKey: 'infoTitle8',
+    descriptionKey: 'infoDec8',
     icon: Icons.info.codePoint,
   ),
 ];

@@ -5,7 +5,7 @@ import 'package:QuakeInfo/features/quakeinfo/presentation/widgets/info_card_widg
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:youtube_player_flutter/youtube_player_flutter.dart';
-
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import '../../../../../config/di/di.dart';
 import '../../widgets/appbar_widgets.dart';
 
@@ -46,7 +46,7 @@ class _InformationScreenState extends State<InformationScreen> {
       create: (_) => sl<LocalInfoBloc>()..add(const LocalInfoLoad()),
       child: Scaffold(
         backgroundColor: colorScheme.background,
-        appBar: AppbarWidget(title: 'Neler Yapmalıyım'),
+        appBar: AppbarWidget(title:Text(AppLocalizations.of(context)!.buttonInformation)),
         body: Column(
           children: [
             YoutubePlayer(

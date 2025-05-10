@@ -96,7 +96,7 @@ class _$InfoDatabase extends InfoDatabase {
       },
       onCreate: (database, version) async {
         await database.execute(
-            'CREATE TABLE IF NOT EXISTS `InfoEntity` (`id` INTEGER NOT NULL, `title` TEXT NOT NULL, `description` TEXT NOT NULL, `icon` INTEGER NOT NULL, PRIMARY KEY (`id`))');
+            'CREATE TABLE IF NOT EXISTS `InfoEntity` (`id` INTEGER NOT NULL, `titleKey` TEXT NOT NULL, `descriptionKey` TEXT NOT NULL, `icon` INTEGER NOT NULL, PRIMARY KEY (`id`))');
 
         await callback?.onCreate?.call(database, version);
       },
@@ -120,8 +120,8 @@ class _$InfoDao extends InfoDao {
             'InfoEntity',
             (InfoEntity item) => <String, Object?>{
                   'id': item.id,
-                  'title': item.title,
-                  'description': item.description,
+                  'titleKey': item.titleKey,
+                  'descriptionKey': item.descriptionKey,
                   'icon': item.icon
                 });
 
@@ -138,8 +138,8 @@ class _$InfoDao extends InfoDao {
     return _queryAdapter.queryList('SELECT * FROM InfoEntity',
         mapper: (Map<String, Object?> row) => InfoEntity(
             id: row['id'] as int,
-            title: row['title'] as String,
-            description: row['description'] as String,
+            titleKey: row['titleKey'] as String,
+            descriptionKey: row['descriptionKey'] as String,
             icon: row['icon'] as int));
   }
 

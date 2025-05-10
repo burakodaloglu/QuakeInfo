@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class InfoCard extends StatelessWidget {
   const InfoCard({super.key});
@@ -15,7 +16,7 @@ class InfoCard extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Text(
-            "Neden Deprem Çantası Hazırlamalıyız?",
+            AppLocalizations.of(context)!.bagInfoTitle,
             style: theme.textTheme.titleMedium?.copyWith(
               fontWeight: FontWeight.bold,
               color: colorScheme.onSurface,
@@ -23,8 +24,7 @@ class InfoCard extends StatelessWidget {
           ),
           const SizedBox(height: 8),
           Text(
-            "Deprem sonrası ilk 72 saat çok kritiktir. Yardım gecikebilir ve temel ihtiyaçlara erişim zorlaşabilir. "
-                "Hazırlıklı olmak, hayati riskleri azaltır. Deprem çantanızı buradan kontrol edebilirsiniz.",
+            AppLocalizations.of(context)!.bagInfo,
             style: theme.textTheme.bodyMedium?.copyWith(
               color: colorScheme.onSurface.withOpacity(0.7),
               height: 1.4,

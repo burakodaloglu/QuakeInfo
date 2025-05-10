@@ -1,9 +1,11 @@
 import 'package:QuakeInfo/features/quakeinfo/presentation/pages/earthquake/pages/earthquake_list_screen.dart';
 import 'package:QuakeInfo/features/quakeinfo/presentation/pages/earthquake/pages/earthquake_map_screen.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class EarthquakeScreen extends StatefulWidget {
+  const EarthquakeScreen({super.key});
+
   @override
   State<EarthquakeScreen> createState() => _EarthquakeScreenState();
 }
@@ -27,14 +29,14 @@ class _EarthquakeScreenState extends State<EarthquakeScreen> {
             _selectedIndex = index;
           });
         },
-        items: const [
+        items: [
           BottomNavigationBarItem(
-            icon: Icon(Icons.map),
-            label: 'Harita',
+            icon: const Icon(Icons.map),
+            label: AppLocalizations.of(context)!.navMap,
           ),
           BottomNavigationBarItem(
-            icon: Icon(Icons.list),
-            label: 'Liste',
+            icon: const Icon(Icons.list),
+            label: AppLocalizations.of(context)!.navList,
           ),
         ],
       ),

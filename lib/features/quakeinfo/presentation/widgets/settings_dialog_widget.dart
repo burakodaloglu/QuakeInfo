@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:QuakeInfo/features/quakeinfo/presentation/widgets/language_theme_selector.dart'; // Bu widget'ı dahil et
+import 'package:QuakeInfo/features/quakeinfo/presentation/widgets/language_theme_selector.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class SettingsDialogWidget extends StatelessWidget {
   const SettingsDialogWidget({super.key});
@@ -18,7 +19,7 @@ class SettingsDialogWidget extends StatelessWidget {
           mainAxisSize: MainAxisSize.min,
           children: [
             Text(
-              'Ayarlar',
+            AppLocalizations.of(context)!.settings,
               style: TextStyle(
                 fontSize: 22,
                 fontWeight: FontWeight.bold,

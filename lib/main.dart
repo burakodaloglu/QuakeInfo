@@ -1,11 +1,13 @@
-import 'package:QuakeInfo/config/theme/theme.dart';
-import 'package:QuakeInfo/features/quakeinfo/presentation/bloc/bag/local/local_bag_bloc.dart';
-import 'package:QuakeInfo/features/quakeinfo/presentation/bloc/earthquake/remote/remote_earthquake_bloc.dart';
-import 'package:QuakeInfo/features/quakeinfo/presentation/bloc/info/local/local_info_event.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_localizations/flutter_localizations.dart';
 import 'config/di/di.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'config/routes/router.dart';
+import 'config/theme/theme.dart';
+import 'features/quakeinfo/presentation/bloc/bag/local/local_bag_bloc.dart';
+import 'features/quakeinfo/presentation/bloc/earthquake/remote/remote_earthquake_bloc.dart';
 import 'features/quakeinfo/presentation/bloc/earthquake/remote/remote_earthquake_event.dart';
 import 'features/quakeinfo/presentation/bloc/info/local/local_info_bloc.dart';
 
@@ -23,8 +25,8 @@ class MyApp extends StatelessWidget {
     return MultiBlocProvider(
       providers: [
         BlocProvider(create: (_) => LocalBagBloc(sl())),
-        BlocProvider(create: (_) => sl<LocalInfoBloc>()..add(const LocalInfoLoad())),
-        BlocProvider(create: (_) => sl<RemoteEarthquakeBloc>()..add(const GetEarthquake()))
+        BlocProvider(create: (_) => LocalInfoBloc()),
+        BlocProvider(create: (_) => sl<RemoteEarthquakeBloc>()..add(const GetEarthquake())),
       ],
       child: MaterialApp.router(
         theme: AppThemes.lightTheme(),
@@ -32,6 +34,18 @@ class MyApp extends StatelessWidget {
         themeMode: ThemeMode.system,
         routerConfig: router,
         debugShowCheckedModeBanner: false,
+
+        localizationsDelegates: const [
+          AppLocalizations.delegate,
+          GlobalMaterialLocalizations.delegate,
+          GlobalWidgetsLocalizations.delegate,
+          GlobalCupertinoLocalizations.delegate,
+        ],
+        supportedLocales: const [
+          Locale('en'),
+          Locale('tr'),
+        ],
+
       ),
     );
   }

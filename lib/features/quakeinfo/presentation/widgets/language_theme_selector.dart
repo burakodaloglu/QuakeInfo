@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class LanguageThemeSelector extends StatefulWidget {
   const LanguageThemeSelector({super.key});
@@ -11,11 +12,14 @@ class _LanguageThemeSelectorState extends State<LanguageThemeSelector> {
   final List<String> languages = ['Türkçe', 'English'];
   int currentLanguageIndex = 0;
 
-  String currentTheme = 'Sistem'; // Başlangıçta sistem teması
+  String currentTheme = "Açık";
 
   void _changeLanguage(int direction) {
     setState(() {
-      currentLanguageIndex = (currentLanguageIndex + direction).clamp(0, languages.length - 1);
+      currentLanguageIndex = (currentLanguageIndex + direction).clamp(
+        0,
+        languages.length - 1,
+      );
     });
   }
 
@@ -29,7 +33,7 @@ class _LanguageThemeSelectorState extends State<LanguageThemeSelector> {
   void _saveSettings() {
     // Burada ayarları kaydetme işlemi yapılabilir
     ScaffoldMessenger.of(context).showSnackBar(
-      const SnackBar(content: Text("Ayarlar kaydedildi!")),
+      SnackBar(content: Text(AppLocalizations.of(context)!.settingsSaved)),
     );
     Navigator.of(context).pop();
   }
@@ -44,7 +48,7 @@ class _LanguageThemeSelectorState extends State<LanguageThemeSelector> {
         mainAxisSize: MainAxisSize.min,
         children: [
           _buildSelectorRow(
-            title: 'Dil',
+            title: AppLocalizations.of(context)!.settingsLanguageTitle,
             currentValue: languages[currentLanguageIndex],
             onPrevious: () => _changeLanguage(-1),
             onNext: () => _changeLanguage(1),
@@ -53,20 +57,28 @@ class _LanguageThemeSelectorState extends State<LanguageThemeSelector> {
           ),
           const SizedBox(height: 20),
           _buildSelectorRow(
-            title: 'Tema',
+            title: AppLocalizations.of(context)!.settingsThemeTitle,
             currentValue: currentTheme,
-            onPrevious: () => _changeTheme('Sistem'),
+            onPrevious:
+                () => _changeTheme(
+                  AppLocalizations.of(context)!.settingsThemeSystem,
+                ),
             onNext: () {
-              if (currentTheme == 'Sistem') {
-                _changeTheme('Açık');
-              } else if (currentTheme == 'Açık') {
-                _changeTheme('Koyu');
+              if (currentTheme ==
+                  AppLocalizations.of(context)!.settingsThemeSystem) {
+                _changeTheme(AppLocalizations.of(context)!.settingsThemeLight);
+              } else if (currentTheme ==
+                  AppLocalizations.of(context)!.settingsThemeLight) {
+                _changeTheme(AppLocalizations.of(context)!.settingsThemeDark);
               } else {
-                _changeTheme('Sistem');
+                _changeTheme(AppLocalizations.of(context)!.settingsThemeSystem);
               }
             },
-            isFirst: currentTheme == 'Sistem',
-            isLast: currentTheme == 'Koyu',
+            isFirst:
+                currentTheme ==
+                AppLocalizations.of(context)!.settingsThemeSystem,
+            isLast:
+                currentTheme == AppLocalizations.of(context)!.settingsThemeDark,
           ),
           const SizedBox(height: 30),
           ElevatedButton(
@@ -97,27 +109,35 @@ class _LanguageThemeSelectorState extends State<LanguageThemeSelector> {
     return Row(
       children: [
         Expanded(
-          child: Text(title,
-              style: TextStyle(
-                fontSize: 16,
-                fontWeight: FontWeight.w500,
-                color: colorScheme.onBackground,
-              )),
-        ),
-        IconButton(
-          icon: Icon(Icons.chevron_left,
-              color: isFirst ? Colors.grey : colorScheme.primary),
-          onPressed: isFirst ? null : onPrevious,
-        ),
-        Text(currentValue,
+          child: Text(
+            title,
             style: TextStyle(
               fontSize: 16,
-              fontWeight: FontWeight.bold,
+              fontWeight: FontWeight.w500,
               color: colorScheme.onBackground,
-            )),
+            ),
+          ),
+        ),
         IconButton(
-          icon: Icon(Icons.chevron_right,
-              color: isLast ? Colors.grey : colorScheme.primary),
+          icon: Icon(
+            Icons.chevron_left,
+            color: isFirst ? Colors.grey : colorScheme.primary,
+          ),
+          onPressed: isFirst ? null : onPrevious,
+        ),
+        Text(
+          currentValue,
+          style: TextStyle(
+            fontSize: 16,
+            fontWeight: FontWeight.bold,
+            color: colorScheme.onBackground,
+          ),
+        ),
+        IconButton(
+          icon: Icon(
+            Icons.chevron_right,
+            color: isLast ? Colors.grey : colorScheme.primary,
+          ),
           onPressed: isLast ? null : onNext,
         ),
       ],

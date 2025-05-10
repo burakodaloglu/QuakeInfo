@@ -8,6 +8,7 @@ import '../../bloc/bag/local/local_bag_event.dart';
 import '../../bloc/bag/local/local_bag_state.dart';
 import '../../widgets/bag_card.dart';
 import '../../widgets/info_card.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class BagScreen extends StatelessWidget {
   const BagScreen({super.key});
@@ -19,7 +20,7 @@ class BagScreen extends StatelessWidget {
       create: (_) => sl<LocalBagBloc>()..add(const LoadBagList()),
       child: Scaffold(
         backgroundColor: colorScheme.background,
-        appBar: AppbarWidget(title: "Çantam"),
+        appBar: AppbarWidget(title:Text(AppLocalizations.of(context)!.buttonBag)),
         body: const BagContent(),
       ),
     );

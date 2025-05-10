@@ -4,7 +4,7 @@ import 'package:QuakeInfo/features/quakeinfo/presentation/widgets/appbar_widgets
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import '../../../widgets/earthquake_card_widget.dart';
 
 class EarthquakeListScreen extends StatelessWidget {
@@ -15,7 +15,7 @@ class EarthquakeListScreen extends StatelessWidget {
     final colorScheme = Theme.of(context).colorScheme;
     return Scaffold(
       backgroundColor: colorScheme.background,
-      appBar: const AppbarWidget(title: "Liste"),
+      appBar: AppbarWidget(title:Text(AppLocalizations.of(context)!.navList)),
       body: _buildBody(),
     );
   }

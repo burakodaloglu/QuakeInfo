@@ -1,8 +1,10 @@
+import 'package:QuakeInfo/l10n/app_localizations.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../domain/entities/bag_entity.dart';
 import '../bloc/bag/local/local_bag_bloc.dart';
 import '../bloc/bag/local/local_bag_event.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class BagCard extends StatefulWidget {
   final BagEntity bag;
@@ -23,6 +25,7 @@ class _BagCardState extends State<BagCard> {
 
   @override
   Widget build(BuildContext context) {
+    final loc = AppLocalizations.of(context)!;
     final theme = Theme.of(context);
     final colorScheme = theme.colorScheme;
     final bag = widget.bag;
@@ -61,7 +64,7 @@ class _BagCardState extends State<BagCard> {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
-                      bag.title,
+                      loc.getTranslation(bag.titleKey),
                       style: theme.textTheme.titleMedium?.copyWith(
                         fontWeight: FontWeight.bold,
                         color: colorScheme.onSurface,
@@ -73,7 +76,7 @@ class _BagCardState extends State<BagCard> {
                     if (_isExpanded) ...[
                       const SizedBox(height: 8),
                       Text(
-                        bag.description,
+                        loc.getTranslation(bag.descriptionKey),
                         style: theme.textTheme.bodyMedium?.copyWith(
                           color: colorScheme.onSurface.withOpacity(0.7),
                         ),

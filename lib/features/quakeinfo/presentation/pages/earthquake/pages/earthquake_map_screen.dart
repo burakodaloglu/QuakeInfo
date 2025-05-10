@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
-
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import '../../../bloc/earthquake/remote/remote_earthquake_bloc.dart';
 import '../../../bloc/earthquake/remote/remote_earthquake_state.dart';
 import '../../../widgets/appbar_widgets.dart';
@@ -14,7 +14,7 @@ class EarthquakeMapScreen extends StatelessWidget {
     final colorScheme = Theme.of(context).colorScheme;
     return Scaffold(
       backgroundColor: colorScheme.background,
-      appBar: const AppbarWidget(title: "Harita"),
+      appBar: AppbarWidget(title:Text(AppLocalizations.of(context)!.navMap)),
       body: _buildBody(),
     );
   }
